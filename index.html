@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
     <div class="container">
 
         <!-- Menú -->
@@ -22,6 +21,8 @@
 
             <div class="message left">
                 <p>
+
+                    <!-- (confirm modal removed; replaced later) -->
                     En este mundo tan extraño y caótico,
                     lo más bonito que me pasó...
                     fuiste tú.
@@ -137,6 +138,16 @@
             <button class="modal-close">×</button>
             <h2>Oh no 😅</h2>
             <p>No te preocupes, intenta acercarte de nuevo cuando quieras.</p>
+        </div>
+    </div>
+
+    <!-- Modal de resultado tras pulsar Sí (simple) -->
+    <div class="modal" id="modal-confirm" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <h2>Te hiciste la de rogar</h2>
+            <p>te hiciste la de rogar, pero al final dijiste que sí</p>
+            <div id="confirm-result" class="confirm-result" aria-live="polite"></div>
         </div>
     </div>
 

@@ -77,20 +77,53 @@ if (noBtn) {
 
 // Inicializar EmailJS
 if (window.emailjs) {
-    emailjs.init('jJNSPVFu1uXnHFDNG');
+    try {
+        emailjs.init('jJNSPVFu1uXnHFDNG');
+        console.log('EmailJS inicializado');
+    } catch (err) {
+        console.error('Error inicializando EmailJS', err);
+    }
+} else {
+    console.warn('EmailJS no está disponible en window');
 }
 
-// Botón Sí -> abrir confirm modal
+// Botón Sí -> enviar inmediatamente y mostrar modal simple
 const yesBtn = document.querySelector('.yes');
 const confirmModal = document.getElementById('modal-confirm');
-const confirmSend = document.getElementById('confirm-send');
-const confirmCancel = document.getElementById('confirm-cancel');
 const confirmResult = document.getElementById('confirm-result');
 
 if (yesBtn) {
     yesBtn.addEventListener('click', () => {
         openModal(confirmModal);
-        confirmResult.textContent = '';
+        if (confirmResult) confirmResult.textContent = 'Enviando...';
+        if (!window.emailjs) {
+            console.error('Intento de envío pero EmailJS no está cargado');
+            if (confirmResult) confirmResult.textContent = 'No se pudo enviar: EmailJS no cargado.';
+            return;
+        }
+        console.log('Enviando correo mediante EmailJS...', {service: 'service_nc7cziz', template: 'template_wtgm0lv'});
+        emailjs.send('service_nc7cziz', 'template_wtgm0lv', {
+            respuesta: 'SI ❤️',
+            fecha: new Date().toLocaleString(),
+            name: 'Sebas',
+            message: 'Hola'
+        })
+            .then(() => {
+                console.log('EmailJS: enviado correctamente');
+                if (confirmResult) confirmResult.textContent = '¡Enviado! 💙';
+                setTimeout(() => {
+                    closeModal(confirmModal);
+                    const success = document.createElement('div');
+                    success.className = 'temp-success';
+                    success.innerHTML = '<div class="inner">💙 Sabía que dirías que sí 💙<br><small>Te quiero muchísimo</small></div>';
+                    document.body.appendChild(success);
+                    setTimeout(() => success.remove(), 2500);
+                }, 700);
+            })
+            .catch((err) => {
+                console.error(err);
+                if (confirmResult) confirmResult.textContent = 'Error al enviar. Revisa la consola.';
+            });
     });
 }
 
@@ -168,37 +201,4 @@ if (audioListEl.length) {
     });
 }
 
-if (confirmCancel) {
-    confirmCancel.addEventListener('click', () => {
-        closeModal(confirmModal);
-    });
-}
-
-if (confirmSend) {
-    confirmSend.addEventListener('click', () => {
-        confirmResult.textContent = 'Enviando...';
-        emailjs.send('service_nc7cziz', 'template_wtgm0lv', {
-            respuesta: 'SI ❤️',
-            fecha: new Date().toLocaleString(),
-            name: 'Sebas',
-            message: 'Hola'
-        })
-            .then(() => {
-                confirmResult.textContent = '¡Enviado! 💙';
-                // pequeño efecto y cierre automático
-                setTimeout(() => {
-                    closeModal(confirmModal);
-                    // mostrar un modal de éxito rápido
-                    const success = document.createElement('div');
-                    success.className = 'temp-success';
-                    success.innerHTML = '<div class="inner">💙 Sabía que dirías que sí 💙<br><small>Te quiero muchísimo</small></div>';
-                    document.body.appendChild(success);
-                    setTimeout(() => success.remove(), 2500);
-                }, 700);
-            })
-            .catch((err) => {
-                console.error(err);
-                confirmResult.textContent = 'Error al enviar. Revisa la consola.';
-            });
-    });
-}
+// (confirm-send / confirm-cancel handlers removed — envío gestionado directamente al pulsar Sí)
