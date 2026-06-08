@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi novia?</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Menú -->
+        <nav>
+            <a href="#">Canciones</a>
+        </nav>
+
+        <!-- Hero -->
+        <section class="hero">
+
+            <div class="message left">
+                <p>
+                    En este mundo tan extraño y caótico,
+                    lo más bonito que me pasó...
+                    fuiste tú.
+                </p>
+            </div>
+
+            <div class="moon-section">
+
+                <div class="heart-logo">
+                    💙
+                </div>
+
+                <img src="img/jackSallyBaile.jpeg" alt="Cadáver de la Novia" style="width: 70%;">
+
+                <h1>¿Quieres ser <span>mi novia</span>?</h1>
+
+                <div class="buttons">
+                    <button class="yes">Sí</button>
+                    <button class="no" id="noBtn">No</button>
+                </div>
+
+                <p class="hint">
+                    (Pista: Jack también tuvo que insistir un poco...)
+                </p>
+
+            </div>
+
+            <div class="message right">
+                <p>
+                    Eres mi persona favorita en esta vida
+                    y en cualquier otra.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- Recuerdos -->
+        <section class="gallery">
+
+            <h2>Nosostros</h2>
+
+            <div class="photos">
+                <img src="img/jacksallyBajoLaLuna.jpeg" alt="Jack y Sally bajo la luna">
+                <img src="img/jacjSallyLunaLlena.jpeg" alt="">
+                <img src="img/elCadaverDeLaNovia.jpeg" alt="El Cadáver de la Novia">
+                <img src="img/adams.jpeg" alt="">
+                <img src="img/jackSally.jpeg" alt="">
+            </div>
+
+        </section>
+
+        <!-- Mensaje -->
+        <section class="love-message">
+
+            <p>
+                Prometo hacerte reír, cuidarte,
+                acompañarte en todas tus locuras y amarte
+                incluso en mis días más extraños.
+            </p>
+
+            <h3>Te amo demasiado 🖤</h3>
+
+        </section>
+
+    </div>
+
+
+    <div class="modal" id="modal-canciones" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <!-- Plantilla visual para canciones -->
+            <div class="template-screen" data-template="canciones">
+                <div class="template-header">
+                    <h2>Canciones</h2>
+                    <p class="subtitle">Melodías que cuentan nuestra historia</p>
+                </div>
+                <div class="template-body">
+                    <div class="audio-list">
+                        <!-- Reemplaza los src por tus archivos reales o URLs -->
+                        <div class="audio-item" data-src="audio/song1.mp3">
+                            <div class="audio-meta">
+                                <span class="title">Can't Help Falling in Love — Elvis Presley</span>
+                                <button class="play-song">Play</button>
+                            </div>
+                            <audio src="audio/takeMyHand.mpeg"></audio>
+                            <input type="range" class="seek" min="0" max="100" value="0">
+                        </div>
+                        <div class="audio-item" data-src="audio/song2.mp3">
+                            <div class="audio-meta">
+                                <span class="title">Corpse Bride — victor Emily</span>
+                                <button class="play-song">Play</button>
+                            </div>
+                            <audio src="audio/victorEmily.mpeg"></audio>
+                            <input type="range" class="seek" min="0" max="100" value="0">
+                        </div>
+                        <div class="audio-item" data-src="audio/song3.mp3">
+                            <div class="audio-meta">
+                                <span class="title">Propuesta — Yo</span>
+                                <button class="play-song">Play</button>
+                            </div>
+                            <audio src="audio/yo.mpeg"></audio>
+                            <input type="range" class="seek" min="0" max="100" value="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="modal-no" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <h2>Oh no 😅</h2>
+            <p>No te preocupes, intenta acercarte de nuevo cuando quieras.</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
