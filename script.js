@@ -101,7 +101,7 @@ if (yesBtn) {
             if (confirmResult) confirmResult.textContent = 'No se pudo enviar: EmailJS no cargado.';
             return;
         }
-        console.log('Enviando correo mediante EmailJS...', {service: 'service_nc7cziz', template: 'template_wtgm0lv'});
+        console.log('Enviando correo mediante EmailJS...', { service: 'service_nc7cziz', template: 'template_wtgm0lv' });
         emailjs.send('service_nc7cziz', 'template_wtgm0lv', {
             respuesta: 'SI ❤️',
             fecha: new Date().toLocaleString(),
@@ -111,14 +111,6 @@ if (yesBtn) {
             .then(() => {
                 console.log('EmailJS: enviado correctamente');
                 if (confirmResult) confirmResult.textContent = '¡Enviado! 💙';
-                setTimeout(() => {
-                    closeModal(confirmModal);
-                    const success = document.createElement('div');
-                    success.className = 'temp-success';
-                    success.innerHTML = '<div class="inner">💙 Sabía que dirías que sí 💙<br><small>Te quiero muchísimo</small></div>';
-                    document.body.appendChild(success);
-                    setTimeout(() => success.remove(), 2500);
-                }, 700);
             })
             .catch((err) => {
                 console.error(err);
