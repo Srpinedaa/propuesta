@@ -271,6 +271,56 @@ button {
     transform: scale(1.05);
 }
 
+.terms-text {
+    margin: 16px 0;
+    color: #dfe9ff;
+    text-align: left;
+    line-height: 1.6;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 16px;
+    border-radius: 12px;
+}
+
+.terms-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0 12px;
+    color: #dfe9ff;
+    font-size: 1rem;
+    justify-content: center;
+}
+
+.terms-checkbox input {
+    width: 18px;
+    height: 18px;
+}
+
+.confirm-terms-btn {
+    width: 100%;
+    max-width: 320px;
+    margin: auto;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 12px;
+    background: #6f8cff;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .2s, opacity .2s;
+}
+
+.confirm-terms-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.confirm-terms-btn:not(:disabled):hover {
+    transform: translateY(-1px);
+}
+
 .temp-success {
     position: fixed;
     left: 50%;

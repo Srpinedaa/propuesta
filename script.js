@@ -87,35 +87,64 @@ if (window.emailjs) {
     console.warn('EmailJS no está disponible en window');
 }
 
-// Botón Sí -> enviar inmediatamente y mostrar modal simple
+// Botón Sí -> abrir modal de términos antes de enviar
 const yesBtn = document.querySelector('.yes');
+const termsModal = document.getElementById('modal-terms');
+const acceptTermsBtn = document.getElementById('accept-terms-btn');
+const acceptTermsCheckbox = document.getElementById('accept-terms-checkbox');
 const confirmModal = document.getElementById('modal-confirm');
 const confirmResult = document.getElementById('confirm-result');
 
+function sendEmail() {
+    openModal(confirmModal);
+    if (confirmResult) confirmResult.textContent = 'Enviando...';
+    if (!window.emailjs) {
+        console.error('Intento de envío pero EmailJS no está cargado');
+        if (confirmResult) confirmResult.textContent = 'No se pudo enviar: EmailJS no cargado.';
+        return;
+    }
+    console.log('Enviando correo mediante EmailJS...', { service: 'service_nc7cziz', template: 'template_wtgm0lv' });
+    emailjs.send('service_nc7cziz', 'template_wtgm0lv', {
+        respuesta: 'SI ❤️',
+        fecha: new Date().toLocaleString(),
+        name: 'Sebas',
+        message: 'Hola'
+    })
+        .then(() => {
+            console.log('EmailJS: enviado correctamente');
+            if (confirmResult) confirmResult.textContent = '¡Enviado! 💙';
+        })
+        .catch((err) => {
+            console.error(err);
+            if (confirmResult) confirmResult.textContent = 'Error al enviar. Revisa la consola.';
+        });
+}
+
 if (yesBtn) {
     yesBtn.addEventListener('click', () => {
-        openModal(confirmModal);
-        if (confirmResult) confirmResult.textContent = 'Enviando...';
-        if (!window.emailjs) {
-            console.error('Intento de envío pero EmailJS no está cargado');
-            if (confirmResult) confirmResult.textContent = 'No se pudo enviar: EmailJS no cargado.';
-            return;
+        openModal(termsModal);
+        if (acceptTermsCheckbox) {
+            acceptTermsCheckbox.checked = false;
         }
-        console.log('Enviando correo mediante EmailJS...', { service: 'service_nc7cziz', template: 'template_wtgm0lv' });
-        emailjs.send('service_nc7cziz', 'template_wtgm0lv', {
-            respuesta: 'SI ❤️',
-            fecha: new Date().toLocaleString(),
-            name: 'Sebas',
-            message: 'Hola'
-        })
-            .then(() => {
-                console.log('EmailJS: enviado correctamente');
-                if (confirmResult) confirmResult.textContent = '¡Enviado! 💙';
-            })
-            .catch((err) => {
-                console.error(err);
-                if (confirmResult) confirmResult.textContent = 'Error al enviar. Revisa la consola.';
-            });
+        if (acceptTermsBtn) {
+            acceptTermsBtn.disabled = true;
+        }
+    });
+}
+
+if (acceptTermsCheckbox) {
+    acceptTermsCheckbox.addEventListener('change', () => {
+        if (acceptTermsBtn) {
+            acceptTermsBtn.disabled = !acceptTermsCheckbox.checked;
+        }
+    });
+}
+
+if (acceptTermsBtn) {
+    acceptTermsBtn.addEventListener('click', () => {
+        if (!acceptTermsCheckbox || !acceptTermsCheckbox.checked) return;
+        closeModal(termsModal);
+        sendEmail();
     });
 }
 
